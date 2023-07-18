@@ -1,0 +1,31 @@
+// insight ye hai ki agar hm idx 1 val 2 ke liye answer soche to uske left ka product 1
+// or uske right ka product 4*3 ka product hoga 1*12=12 hoga
+
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        
+        int[] ans=new int[nums.length];
+        int[] leftProdArr=new int[nums.length];
+        leftProdArr[0]=1;
+        
+        for(int i=1;i<nums.length;i++){
+            leftProdArr[i]=leftProdArr[i-1]*nums[i-1];
+        }
+        // for(int val:leftProdArr){
+        //     System.out.println(val);
+        // }
+        
+        int rightprod=1;  
+        
+        for(int i=nums.length-1;i>=0;i--){
+            ans[i]=leftProdArr[i]*rightprod;
+            rightprod=nums[i]*rightprod;
+        }
+       
+        
+        return ans;
+        
+    }
+    
+    
+}
