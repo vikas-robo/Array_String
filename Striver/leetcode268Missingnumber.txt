@@ -1,0 +1,18 @@
+
+// jaise ki question me hme pta lag rha ha ki o se n number hai to nth number ka su hai
+// n(n+1)/2 let say agr 3 length hai sum=3(3+1)/2=6 agr hm 6 -sum of array kare to hme hmara 
+// answer mil jayega
+
+class Solution {
+    public int missingNumber(int[] nums) {
+        int n=nums.length;
+        
+        int nthsum=n*(n+1)/2;
+        int sumofArray=0;
+        
+        for(int val:nums){
+            sumofArray+=val;
+        }
+        return nthsum-sumofArray;
+    }
+}

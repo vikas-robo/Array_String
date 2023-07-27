@@ -1,0 +1,59 @@
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+       
+       List<List<Integer>> res=new ArrayList<>();
+        Arrays.sort(nums);
+        
+        for(int i=0;i<=nums.length-3;i++){
+
+            if(i!=0 && nums[i]==nums[i-1]){
+                continue;
+            }
+            int val1=nums[i];
+            int target=0-val1;
+            //System.out.println("hello 1");
+    List<List<Integer>> subRes = twoSum(nums, i + 1, nums.length - 1, target);
+             // System.out.println(subRes);
+              for(List<Integer> list: subRes){
+                  list.add(val1);
+                  res.add(list);
+              }
+        }
+
+        return res;     
+        
+    }
+
+     public List<List<Integer>> twoSum(int[] arr, int si, int ei, int target) {
+    List<List<Integer>> res = new ArrayList<>();
+    int left = si;
+    int right = ei;
+    //System.out.println("hello2");
+    
+    while (left < right) {
+      if (left != si && arr[left] == arr[left - 1]) {
+        left++;
+        continue;
+      }
+
+      int sum = arr[left] + arr[right];
+      if (sum == target) {
+        List<Integer> list = new ArrayList<>();
+   
+            list.add(arr[left]);
+            list.add(arr[right]);
+            res.add(list);
+    
+        left++;
+        right--;
+      } else if (sum > target) {
+        right--;
+      } else {
+        left++;
+      }
+    }
+
+    return res;
+  }
+
+}

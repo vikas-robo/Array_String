@@ -1,0 +1,43 @@
+public static List<List<Integer>> twoSum(int[] arr, int target) {
+    List<List<Integer>> res = new ArrayList<>();
+    int left = 0;
+    int right = arr.length - 1;
+    Arrays.sort(arr);
+    while (left < right) {
+      if (left != 0 && arr[left] == arr[left - 1]) {
+        left++;
+        continue;
+      }
+      int sum = arr[left] + arr[right];
+      if (sum == target) {
+        List<Integer> list = new ArrayList<>();
+        list.add(arr[left]);
+        list.add(arr[right]);
+        res.add(list);
+
+        left++;
+        right--;
+      } else if (sum > target) {
+        right--;
+      } else {
+        left++;
+      }
+    }
+    return res;
+
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+
+
+Input: nums = [3,2,4], target = 6
+Output: [1,2]
+
+
+iska basic hai kya ki ek tarika hai ki sort karke two pointer approach se kar lo but isme uniqueness ki dikkat aayegi;
+
+ek tarikka hai ki hashmap use karlo or num:idx ka map bnalo
+
+
+Input: nums = [3,3], target = 6
+Output: [0,1]

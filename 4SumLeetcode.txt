@@ -1,0 +1,68 @@
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        Arrays.sort(nums);
+        return foursumhelper(nums,target,4,0);
+    }
+    
+    public List<List<Integer>> foursumhelper(int[] nums, int target,int k,int si){
+        
+        List<List<Integer>> res=new ArrayList<>();;
+        
+        if(k==2){
+            return twosum(nums,target,si,nums.length-1);
+        }
+        
+        int n=nums.length;
+        if(n<k){
+            return res;
+        }
+        
+        for(int i=si;i<=n-k;i++){
+            if(i!=si&&nums[i]==nums[i-1]) continue;
+            
+            int val=nums[i];
+            int newtarget=target-val;
+            
+            List<List<Integer>> subres=foursumhelper(nums,newtarget,k-1,i+1);
+            
+            for(List<Integer> list: subres){
+                list.add(val);
+                res.add(list);
+            }
+            
+        }
+        
+        return res;
+    }
+    
+    public List<List<Integer>> twosum(int[] arr, int target,int si,int ei){
+      List<List<Integer>> res = new ArrayList<>();
+    int left = si;
+    int right = ei;
+
+    while (left < right) {
+      if (left != si && arr[left] == arr[left - 1]) {
+        left++;
+        continue;
+      }
+
+      int sum = arr[left] + arr[right];
+      if (sum == target) {
+        List<Integer> list = new ArrayList<>();
+        list.add(arr[left]);
+        list.add(arr[right]);
+        res.add(list);
+
+        left++;
+        right--;
+      } else if (sum > target) {
+        right--;
+      } else {
+        left++;
+      }
+    }
+        
+
+    return res;
+    }
+}

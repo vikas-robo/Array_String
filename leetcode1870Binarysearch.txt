@@ -1,0 +1,31 @@
+class Solution {
+    public int minSpeedOnTime(int[] dist, double hour) {
+          
+        if(dist.length>Math.ceil(hour)){
+            return -1;
+        }
+        int left = 1;
+        int right = (int)10e7;
+        while(left <= right){
+            int mid = (left+right)/2;
+            double totalTime = 0;
+            for(int i = 0; i < dist.length - 1 ; i++){
+                totalTime += Math.ceil((double) dist[i] / mid );
+            }
+            totalTime += (double) dist[dist.length - 1] / mid ;
+
+            if(totalTime <= hour){
+                right = mid - 1;
+               // System.out.println("right"+" "+ right);
+            }
+            else{
+                left = mid + 1;
+              //  System.out.println("left"+" "+ left);
+            }
+        }
+      
+        return left;
+
+
+    }
+}
