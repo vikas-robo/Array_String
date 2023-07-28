@@ -1,0 +1,78 @@
+class Solution {
+    
+    public void solve(char[] arr, int i,int j){
+        if(arr[i]=='L'&&arr[j]=='L'){
+            for(int k=i+1;k<j;k++){
+                arr[k]='L';
+            }
+        }
+        
+         if(arr[i]=='R'&&arr[j]=='R'){
+            for(int k=i+1;k<j;k++){
+                arr[k]='R';
+            }
+        }
+        
+         if(arr[i]=='L'&&arr[j]=='R'){
+            // do nothing;
+        }
+        
+         if(arr[i]=='R'&&arr[j]=='L'){
+            int diff=j-i;
+             int mid=(i+j)/2;
+             if(diff%2==0){
+                 for(int k=i+1;k<mid;k++){
+                     arr[k]='R';
+                 }
+                  for(int k=mid+1;k<j;k++){
+                     arr[k]='L';
+                 }
+                 
+             }
+             else{
+                  for(int k=i+1;k<=mid;k++){
+                     arr[k]='R';
+                 }
+                  for(int k=mid+1;k<j;k++){
+                     arr[k]='L';
+                 }
+             }
+        }
+    }
+    
+    public String pushDominoes(String str) {
+       int n=str.length();
+        char[] arr=new char[n+2];
+        arr[0]='L';
+        arr[n+1]='R';
+            
+            for(int i=1;i<arr.length-1;i++){
+                arr[i]=str.charAt(i-1);
+            }
+        
+        // for(char ch : arr){
+        //     System.out.println(ch);
+        // }
+        
+        int j=0;
+        int k=1;
+        
+        while(k<arr.length){
+            while(arr[k]=='.'){
+                k++;
+            }
+            
+            solve(arr,j,k);
+            j=k;
+            k++;
+        }
+        
+        StringBuilder res=new StringBuilder();
+        
+        for(int i=1;i<arr.length-1;i++){
+            res.append(arr[i]);
+        }
+        
+        return res.toString();
+    }
+}

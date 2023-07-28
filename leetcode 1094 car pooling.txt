@@ -1,0 +1,28 @@
+class Solution {
+    public boolean carPooling(int[][] trips, int capacity) {
+        int lastDropLoacation=-1;
+        for(int[] trip:trips){
+            lastDropLoacation=Math.max(lastDropLoacation,trip[2]);
+        }
+        int highWay[]=new int[lastDropLoacation+1];
+
+        for(int trip[]:trips){
+            highWay[trip[1]]+=trip[0];
+            highWay[trip[2]]-=trip[0];
+        }
+               if(highWay[0]>capacity){
+               return false;
+            }
+
+        for(int i=1;i<=lastDropLoacation;i++){
+
+          
+            highWay[i]+=highWay[i-1];
+            if(highWay[i]>capacity){
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
