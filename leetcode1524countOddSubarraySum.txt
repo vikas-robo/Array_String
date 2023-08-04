@@ -1,0 +1,22 @@
+class Solution {
+    public int numOfSubarrays(int[] arr) {
+        int evenSum=0;
+        int oddSum=0;
+        
+        int ans=0;
+        int sum=0;
+        for(int val: arr){
+            sum+=val;
+            
+            if(sum%2==0){
+                ans+=oddSum;
+                evenSum++;
+            }
+            else{
+                ans+=evenSum+1;
+                oddSum++;
+            }
+        }
+        return (int)ans%10000007;
+    }
+}
