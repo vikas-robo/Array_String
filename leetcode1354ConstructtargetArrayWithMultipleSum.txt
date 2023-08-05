@@ -1,0 +1,30 @@
+class Solution {
+    public boolean isPossible(int[] target) {
+        long sum=0;
+        int max=0;
+        
+        for(int i=0;i<target.length;i++){
+            sum+=target[i];
+            if(target[max]<target[i]){
+                max=i;
+            }
+        }
+        
+        
+        
+       
+        
+        long remainingDiff=sum-target[max];
+       // System.out.println(remainingDiff);
+        
+         if(target[max]==1||remainingDiff==1) return true;
+        
+        if(remainingDiff>=target[max]||remainingDiff==0||target[max]%remainingDiff==0) return false;
+        
+        target[max]%=remainingDiff;
+        
+        boolean ans= isPossible(target);
+        
+        return ans;
+    }
+}
