@@ -1,0 +1,41 @@
+class Solution {
+    public int waysToMakeFair(int[] nums) {
+        int n=nums.length;
+        int[] prefixOdd=new int[n];
+        int[] prefixEven=new int[n];
+        int evenSum=0;
+        int oddSum=0;
+        for(int i=0;i<n;i++){
+            if(i%2==0){
+                evenSum+=nums[i];
+            }
+            else{
+                oddSum+=nums[i];
+            }
+            
+            prefixOdd[i]=oddSum;
+            prefixEven[i]=evenSum;
+        }
+        
+        int ways=0;
+        
+        for(int i=0;i<n;i++){
+            
+            if(i==0){
+                 oddSum=prefixEven[n-1]-prefixEven[i];
+                 evenSum=prefixOdd[n-1];
+                if(evenSum==oddSum) ways++;
+                continue;
+            }
+            
+             oddSum=prefixOdd[i-1]+prefixEven[n-1]-prefixEven[i];
+             evenSum=prefixEven[i-1]+prefixOdd[n-1]-prefixOdd[i];
+            
+            if(evenSum==oddSum) ways++;
+            
+        }
+        
+        return ways;
+        
+    }
+}
