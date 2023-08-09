@@ -1,0 +1,44 @@
+class Solution {
+    
+    public int helper(int[] nums,int diff,int p){
+        int i=1;
+        int count=0;
+        while(i<nums.length){
+            if(nums[i]-nums[i-1]<=diff){
+                i++;
+                count++;
+                if(count==p){
+                    break;
+                }
+            }
+            i++;
+        }
+        return count;
+    }
+    
+    public int minimizeMax(int[] nums, int p) {
+        
+        if(p==0){
+            return 0;
+        }
+        
+        int n=nums.length;
+        Arrays.sort(nums);
+        int lo=0;
+        int hi=nums[n-1]-nums[0];
+        //System.out.println(hi);
+        
+        while(lo<=hi){
+            int mid=(lo+hi)/2;
+            
+            if(helper(nums,mid,p)==p){
+                hi=mid-1;
+            }
+            else{
+                lo=mid+1;
+            }
+        }
+        
+        return Math.max(lo,hi);
+    }
+}
