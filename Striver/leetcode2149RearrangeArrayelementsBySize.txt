@@ -1,0 +1,21 @@
+class Solution {
+    public int[] rearrangeArray(int[] nums) {
+        int [] ans=new int[nums.length];
+        
+        int pi=0,ni=1;
+        
+        for(int val:nums){
+            if(val>0){
+                ans[pi]=val;
+                pi+=2;
+            }
+            if(val<0){
+                ans[ni]=val;
+                ni+=2;
+            }
+        }
+        
+        return ans;
+    }
+}
+

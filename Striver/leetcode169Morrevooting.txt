@@ -1,0 +1,41 @@
+// isme O(n2) approach brute force hai agar hashmap use karenge to O(n space use hoga)
+// aisi approch use karni hai ki O(n) time lage or constant space lage
+// ye importat hai moore vooting algorithm
+
+// is me hm pairing karenge distinct element ki pairing ke sath jo last me element  bachega vo 
+// may be majority element ho sakta hai
+class Solution {
+    public int majorityElement(int[] nums) {
+        
+        int val=nums[0];
+        int count=1;
+        
+        int i=1;
+        while(i<nums.length){
+            if(nums[i]==val){
+                count++; // count matlab hai element hai jin se hmne mapping karni hai
+            }
+            else{
+                //mapping kar rhe hai count-- se distinct element ki mapping
+                count--;
+            }
+            
+            if(count==0){
+                val=nums[i];
+                count=1;
+            }
+            i++;
+        }
+        return val;
+//         int freq=0;
+//         for(int n:nums){
+//             if(n==val){
+//                 freq++;
+//             }
+//         }
+        
+//         if(freq>nums.length/2){
+//             return val;
+//         }
+    }
+}
